@@ -99,40 +99,17 @@
                                 <input type="text" id="client-name" required>
                             </div>
                             <div class="form-group">
-                                <label>Тел.</label>
+                                <label>Телефон</label>
                                 <input type="tel" id="client-phone" required>
                             </div>
-
                         </div>
-                        <div class="form-logo">
-                            <div class="logo-container">
-                                <img src="logo.png" alt="ОПТИКА СОНАТА" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <div class="logo-fallback" style="display: none;">
-                                    <div class="eye-icon">👁️</div>
-                                    <div class="brand-name">
-                                        <div class="optics">ОПТИКА</div>
-                                        <div class="sonata">СОНАТА</div>
-                                    </div>
-                                    <div class="contact-info">
-                                        <div>Астана, Сыганак 32</div>
-                                        <div>WhatsApp: +77007430770</div>
-                                        <div>Instagram: sonata.astana</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Order Timing -->
-                    <div class="timing-section">
-                        <h3>Срок готовности заказа:</h3>
-                        <div class="timing-grid">
+                        <div class="form-right">
                             <div class="form-group">
-                                <label>Принят</label>
+                                <label>Дата принятия</label>
                                 <input type="date" id="accept-date" required>
                             </div>
                             <div class="form-group">
-                                <label>Готовность</label>
+                                <label>Срок готовности</label>
                                 <input type="date" id="ready-date" required>
                             </div>
                         </div>
@@ -141,57 +118,67 @@
                     <!-- Prescription Section -->
                     <div class="prescription-section">
                         <h3>Рецепт</h3>
-                        <table class="prescription-table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Sph</th>
-                                    <th>Cyl</th>
-                                    <th>Ax</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>OD</td>
-                                    <td><input type="number" step="0.25" id="od-sph"></td>
-                                    <td><input type="number" step="0.25" id="od-cyl"></td>
-                                    <td><input type="number" id="od-ax" min="0" max="180"></td>
-                                </tr>
-                                <tr>
-                                    <td>OS</td>
-                                    <td><input type="number" step="0.25" id="os-sph"></td>
-                                    <td><input type="number" step="0.25" id="os-cyl"></td>
-                                    <td><input type="number" id="os-ax" min="0" max="180"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="pd-input">
-                            <label>Pd</label>
-                            <input type="number" id="pd" step="0.5" placeholder="мм">
+                        <div class="prescription-grid">
+                            <div class="eye-column">
+                                <h4>Правый глаз (OD)</h4>
+                                <div class="prescription-inputs">
+                                    <div class="input-group">
+                                        <label>Sph</label>
+                                        <input type="number" id="od-sph" step="0.25" placeholder="0.00">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Cyl</label>
+                                        <input type="number" id="od-cyl" step="0.25" placeholder="0.00">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Ax</label>
+                                        <input type="number" id="od-ax" min="0" max="180" placeholder="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="eye-column">
+                                <h4>Левый глаз (OS)</h4>
+                                <div class="prescription-inputs">
+                                    <div class="input-group">
+                                        <label>Sph</label>
+                                        <input type="number" id="os-sph" step="0.25" placeholder="0.00">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Cyl</label>
+                                        <input type="number" id="os-cyl" step="0.25" placeholder="0.00">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Ax</label>
+                                        <input type="number" id="os-ax" min="0" max="180" placeholder="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pd-section">
+                                <h4>Межзрачковое расстояние (PD)</h4>
+                                <input type="number" id="pd-distance" step="0.5" placeholder="62.0" min="50" max="80">
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Items and Costs -->
+                    <!-- Items Section -->
                     <div class="items-section">
                         <h3>Товары и услуги</h3>
-                        <div class="items-table">
-                            <div class="items-header">
-                                <div class="item-name-header">Наименование</div>
-                                <div class="item-quantity-header">Кол-во</div>
-                                <div class="item-price-header">Цена за ед.</div>
-                                <div class="item-discount-header">Скидка %</div>
-                                <div class="item-total-header">Сумма</div>
-                                <div class="item-actions-header">Действия</div>
-                            </div>
-                            <div id="items-list">
-                                <div class="item-row">
-                                    <input type="text" placeholder="Наименование" class="item-name">
-                                    <input type="number" placeholder="1" class="item-quantity" min="1" value="1">
-                                    <input type="number" placeholder="Цена" class="item-price" step="0.01">
-                                    <input type="number" placeholder="0" class="item-discount" min="0" max="100" value="0">
-                                    <input type="number" placeholder="0" class="item-total" readonly>
-                                    <button type="button" class="remove-item" onclick="removeItem(this)">✕</button>
-                                </div>
+                        <div class="items-header">
+                            <span>Наименование</span>
+                            <span>Кол-во</span>
+                            <span>Цена</span>
+                            <span>Скидка %</span>
+                            <span>Итого</span>
+                            <span>Действие</span>
+                        </div>
+                        <div id="items-container">
+                            <div class="item-row">
+                                <input type="text" placeholder="Наименование" class="item-name">
+                                <input type="number" placeholder="1" class="item-quantity" min="1" value="1">
+                                <input type="number" placeholder="Цена" class="item-price" step="0.01">
+                                <input type="number" placeholder="0" class="item-discount" min="0" max="100" value="0">
+                                <input type="number" placeholder="0" class="item-total" readonly>
+                                <button type="button" class="remove-item" onclick="removeItem(this)">✕</button>
                             </div>
                         </div>
                         <button type="button" class="add-item-btn" onclick="addItem()">+ Добавить позицию</button>

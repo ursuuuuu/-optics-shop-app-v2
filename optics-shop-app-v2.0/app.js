@@ -11,36 +11,60 @@ let globalLogoDataURL = null;
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
-    initializeApp();
-    loadSampleData();
-    updateDashboard();
+    console.log('DOM loaded, initializing app...');
+    try {
+        initializeApp();
+        loadSampleData();
+        updateDashboard();
+        console.log('App initialization complete');
+    } catch (error) {
+        console.error('Error during app initialization:', error);
+    }
 });
 
 // Initialize the application
 function initializeApp() {
-    // Set current date
-    const today = new Date();
-    document.getElementById('current-date').textContent = today.toLocaleDateString('ru-RU');
-    
-    // Set default dates for new orders
-    document.getElementById('accept-date').value = today.toISOString().split('T')[0];
-    const readyDate = new Date(today.getTime() + (7 * 24 * 60 * 60 * 1000));
-    document.getElementById('ready-date').value = readyDate.toISOString().split('T')[0];
-    
-    // Generate order number
-    document.getElementById('order-number').value = generateOrderNumber();
-    
-    // Setup navigation
-    setupNavigation();
-    
-    // Setup form submission
-    setupFormHandling();
-    
-    // Setup search functionality
-    setupSearch();
-    
-    // Setup form calculations
-    setupFormCalculations();
+    try {
+        // Set current date
+        const currentDateElement = document.getElementById('current-date');
+        if (currentDateElement) {
+            const today = new Date();
+            currentDateElement.textContent = today.toLocaleDateString('ru-RU');
+        }
+        
+        // Set default dates for new orders
+        const acceptDateElement = document.getElementById('accept-date');
+        const readyDateElement = document.getElementById('ready-date');
+        
+        if (acceptDateElement && readyDateElement) {
+            const today = new Date();
+            acceptDateElement.value = today.toISOString().split('T')[0];
+            const readyDate = new Date(today.getTime() + (7 * 24 * 60 * 60 * 1000));
+            readyDateElement.value = readyDate.toISOString().split('T')[0];
+        }
+        
+        // Generate order number
+        const orderNumberElement = document.getElementById('order-number');
+        if (orderNumberElement) {
+            orderNumberElement.value = generateOrderNumber();
+        }
+        
+        // Setup navigation
+        setupNavigation();
+        
+        // Setup form submission
+        setupFormHandling();
+        
+        // Setup search functionality
+        setupSearch();
+        
+        // Setup form calculations
+        setupFormCalculations();
+        
+        console.log('App initialized successfully');
+    } catch (error) {
+        console.error('Error initializing app:', error);
+    }
 }
 
 // Setup navigation between sections
@@ -455,22 +479,34 @@ function loadFinance() {
 
 // Update dashboard
 function updateDashboard() {
-    const newOrders = orders.filter(order => order.status === 'new').length;
-    const inProgress = orders.filter(order => order.status === 'in-progress').length;
-    const ready = orders.filter(order => order.status === 'ready').length;
-    
-    const todayRevenue = orders.filter(order => {
-        const orderDate = new Date(order.createdAt).toDateString();
-        const today = new Date().toDateString();
-        return orderDate === today;
-    }).reduce((sum, order) => {
-        return sum + order.items.reduce((itemSum, item) => itemSum + (item.total || item.price), 0);
-    }, 0);
-    
-    document.getElementById('new-orders').textContent = newOrders;
-    document.getElementById('in-progress').textContent = inProgress;
-    document.getElementById('ready').textContent = ready;
-    document.getElementById('daily-revenue').textContent = `${todayRevenue} KZT`;
+    try {
+        const newOrders = orders.filter(order => order.status === 'new').length;
+        const inProgress = orders.filter(order => order.status === 'in-progress').length;
+        const ready = orders.filter(order => order.status === 'ready').length;
+        
+        const todayRevenue = orders.filter(order => {
+            const orderDate = new Date(order.createdAt).toDateString();
+            const today = new Date().toDateString();
+            return orderDate === today;
+        }).reduce((sum, order) => {
+            return sum + order.items.reduce((itemSum, item) => itemSum + (item.total || item.price), 0);
+        }, 0);
+        
+        // Safely update dashboard elements
+        const newOrdersElement = document.getElementById('new-orders');
+        const inProgressElement = document.getElementById('in-progress');
+        const readyElement = document.getElementById('ready');
+        const dailyRevenueElement = document.getElementById('daily-revenue');
+        
+        if (newOrdersElement) newOrdersElement.textContent = newOrders;
+        if (inProgressElement) inProgressElement.textContent = inProgress;
+        if (readyElement) readyElement.textContent = ready;
+        if (dailyRevenueElement) dailyRevenueElement.textContent = `${todayRevenue} KZT`;
+        
+        console.log('Dashboard updated successfully');
+    } catch (error) {
+        console.error('Error updating dashboard:', error);
+    }
 }
 
 // Setup search functionality
